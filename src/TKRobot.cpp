@@ -1,11 +1,15 @@
 #include "TKRobot.h"
 
+
 /**
  * Constructor
  */
 TKRobot::TKRobot()
 {
 	lw = LiveWindow::GetInstance();
+	BrasDrapeau = new TKBras(0, 0);
+	PinceDrapeau = new TKPince(0);
+
 }
 
 /**
@@ -13,6 +17,8 @@ TKRobot::TKRobot()
  */
 TKRobot::~TKRobot()
 {
+	delete BrasDrapeau;
+	delete PinceDrapeau;
 }
 
 /**
@@ -44,7 +50,9 @@ void TKRobot::AutonomousPeriodic()
  */
 void TKRobot::TeleopInit()
 {
-
+	// Mettre en position initiale (x- z+ p-)
+	BrasDrapeau->PositionBrasBase();
+	PinceDrapeau->PinceOuvrir();
 }
 
 /**
@@ -52,7 +60,8 @@ void TKRobot::TeleopInit()
  */
 void TKRobot::TeleopPeriodic()
 {
-
+	BrasDrapeau->Set();
+	PinceDrapeau->Set();
 }
 
 /**

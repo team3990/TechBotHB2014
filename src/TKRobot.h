@@ -8,7 +8,11 @@
 #ifndef SRC_TKROBOT_H_
 #define SRC_TKROBOT_H_
 
-#include "WPILib.h"
+
+#include "TKBras.h"
+#include "TKPince.h"
+#include "TKGamepad.h"
+
 
 class TKRobot : public IterativeRobot
 {
@@ -19,6 +23,9 @@ public:
 	// Constructors
 	TKRobot();
 	virtual ~TKRobot();
+	TKBras * BrasDrapeau;
+	TKPince * PinceDrapeau;
+
 
 	// Robot Routines
 	void		RobotInit();

@@ -10,6 +10,8 @@
 
 #include "WPILIB.h"
 
+enum NomBouton {BOUTONA, BOUTONB, BOUTONX, BOUTONY};
+
 
 class TKGamepad : public Joystick
 {
@@ -25,6 +27,7 @@ public:
 	float				GetRightX();
 	float				GetRightY();
 	float				Trigger();
+	bool 				GetButton(NomBouton);
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(TKGamepad);

@@ -7,37 +7,28 @@
 
 #include "TKPince.h"
 
-TKPince::TKPince()
-{
-	TKPince::PinceMoteur = new Victor((uint32_t)0);
-}
 
+TKPince::TKPince(int MoteurPinceCanal) {
+	PinceMoteur = new Victor((uint32_t)MoteurPinceCanal);
+}
 TKPince::~TKPince() {
-
+	delete PinceMoteur;
 }
 
-void TKPince::PinceOuvrir()
-{
-	this->PinceOuverture = 1;
-}
-
-void TKPince::PinceFermer()
-{
-	this->PinceOuverture = -1;
-}
+void TKPince::PinceOuvrir() {PinceOuverture = 1;}
+void TKPince::PinceFermer() {PinceOuverture = -1;}
 
 void TKPince::Set()
 {
-	if((this->OuverturePresente > 500) | (this->OuverturePresente < 0))
+	// Si la pince a atteint son ouverture maximale et que la vitesse doit augmenter ou qu'elle a atteint son ouverture minimale et que la vitesse doit diminuer:
+	// Définir PinceOuverture comme nul.
+	if(((OuverturePresente > OuvertureMaximalePince) && (PinceOuverture == 1)) ||
+			((OuverturePresente < 0) && (PinceOuverture == -1)))
 	{
-		PinceMoteur->Set(0.0);
-
-		this->PinceOuverture = this->OuverturePresente = 0;
-	}
-	this->PinceMoteur->Set(this->vitesse * this->PinceOuverture);
-	if (!((!this->PinceOuverture) && (this->OuverturePresente == 0)))
-	{
-		this->OuverturePresente += this->PinceOuverture * 20;
+		PinceOuverture = 0;
 	}
 
+	// Si la condition précédente a été remplie, ces opérations seront forcément nulles.
+	PinceMoteur->Set(vitesse * PinceOuverture);
+	OuverturePresente += PinceOuverture * 20;
 }

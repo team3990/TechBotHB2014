@@ -41,3 +41,20 @@ float TKGamepad::Trigger()
 {
 	return Joystick::GetRawAxis(uint32_t(3));
 }
+
+bool TKGamepad::GetButton(NomBouton x)
+{
+	switch (x)
+	{
+	case BOUTONA:
+		return Joystick::GetRawButton(0);
+	case BOUTONB:
+		return Joystick::GetRawButton(1);
+	case BOUTONX:
+		return Joystick::GetRawButton(2);
+	case BOUTONY:
+		return Joystick::GetRawButton(3);
+	}
+	return false;
+
+}

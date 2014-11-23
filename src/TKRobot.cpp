@@ -7,9 +7,10 @@
 TKRobot::TKRobot()
 {
 	lw = LiveWindow::GetInstance();
-	BrasDrapeau = new TKBras(0, 0);
+	BrasDrapeau = new TKBras(6, 4);
 	PinceDrapeau = new TKPince(0);
-
+	Gamepad = new TKGamepad(1);
+	DrivingBase = new TKDrivingBase();
 }
 
 /**
@@ -19,6 +20,8 @@ TKRobot::~TKRobot()
 {
 	delete BrasDrapeau;
 	delete PinceDrapeau;
+	delete Gamepad;
+	delete DrivingBase;
 }
 
 /**
@@ -52,7 +55,7 @@ void TKRobot::TeleopInit()
 {
 	// Mettre en position initiale (x- z+ p-)
 	BrasDrapeau->PositionBrasBase();
-	PinceDrapeau->PinceOuvrir();
+	//	PinceDrapeau->PinceOuvrir();
 }
 
 /**
@@ -60,8 +63,19 @@ void TKRobot::TeleopInit()
  */
 void TKRobot::TeleopPeriodic()
 {
+
+	DrivingBase->Drive(Gamepad->GetLeftX(), Gamepad->GetLeftY());
+	if(Gamepad->Joystick::GetRawButton(0))
+	{
+		BrasDrapeau->PositionBrasPrise();
+	}
+	if(Gamepad->Joystick::GetRawButton(1))
+		{
+			BrasDrapeau->PositionBrasBase();
+		}
 	BrasDrapeau->Set();
-	PinceDrapeau->Set();
+	//PinceDrapeau->Set();
+
 }
 
 /**

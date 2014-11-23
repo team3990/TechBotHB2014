@@ -24,8 +24,8 @@ const int kSol_Shifter(5);					// DrivingBase.h
 /**
  * PWM
  */
-const int kPWM_MotorLeft(0);				// DrivingBase.h
-const int kPWM_MotorRight(1);				// DrivingBase.h
+const int kPWM_MotorLeft(1);				// DrivingBase.h
+const int kPWM_MotorRight(2);				// DrivingBase.h
 
 /**
  * Other Constants

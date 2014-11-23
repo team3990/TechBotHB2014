@@ -9,8 +9,10 @@
 #define SRC_TKGAMEPAD_H_
 
 #include "WPILIB.h"
+#include <vector>
+#include <map>
 
-enum NomBouton {BOUTONA, BOUTONB, BOUTONX, BOUTONY};
+enum NomBouton {BOUTONA, BOUTONB, BOUTONX, BOUTONY, STICK};
 
 
 class TKGamepad : public Joystick
@@ -27,7 +29,7 @@ public:
 	float				GetRightX();
 	float				GetRightY();
 	float				Trigger();
-	bool 				GetButton(NomBouton);
+	std::vector<NomBouton>   Get();
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(TKGamepad);

@@ -12,28 +12,32 @@
 #include "TKBras.h"
 #include "TKPince.h"
 #include "TKGamepad.h"
+#include "TKDriveBase.h"
 
 
 class TKRobot : public IterativeRobot
 {
 private:
-	LiveWindow 	* lw;
+	LiveWindow		* lw;
 
 public:
 	// Constructors
 	TKRobot();
 	virtual ~TKRobot();
-	TKBras * BrasDrapeau;
-	TKPince * PinceDrapeau;
 
+	// Objects
+	TKBras 			* BrasDrapeau;
+	TKPince			* PinceDrapeau;
+	TKDrivingBase 	* DrivingBase;
+	TKGamepad 		* Gamepad;
 
-	//Â Robot Routines
-	void		RobotInit();
-	void		AutonomousInit();
-	void		AutonomousPeriodic();
-	void		TeleopInit();
-	void		TeleopPeriodic();
-	void		TestPeriodic();
+	// Robot Routines
+	void			RobotInit();
+	void			AutonomousInit();
+	void			AutonomousPeriodic();
+	void			TeleopInit();
+	void			TeleopPeriodic();
+	void			TestPeriodic();
 };
 
 

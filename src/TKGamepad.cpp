@@ -42,19 +42,23 @@ float TKGamepad::Trigger()
 	return Joystick::GetRawAxis(uint32_t(3));
 }
 
-bool TKGamepad::GetButton(NomBouton x)
+std::vector<NomBouton> TKGamepad::Get()
 {
-	switch (x)
-	{
-	case BOUTONA:
-		return Joystick::GetRawButton(0);
-	case BOUTONB:
-		return Joystick::GetRawButton(1);
-	case BOUTONX:
-		return Joystick::GetRawButton(2);
-	case BOUTONY:
-		return Joystick::GetRawButton(3);
-	}
-	return false;
+	std::map<int, NomBouton> x;
+	x[0] = BOUTONA;
+	x[1] = BOUTONB;
+	x[2] = BOUTONX;
+	x[3] = BOUTONY;
 
+	std::vector<NomBouton> aretourner;
+	std::map<int,NomBouton>::iterator iter;
+	for(iter=x.begin(); iter!=x.end(); iter++)
+	{
+		if(Joystick::GetRawButton(iter->first))
+		{
+			aretourner.push_back(iter->second);
+		}
+	}
+
+	return aretourner;
 }

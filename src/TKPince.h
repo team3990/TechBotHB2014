@@ -16,7 +16,7 @@
 // Valeur maximale de OuverturePresente avant le blocage du moteur
 // (Valeur défaut de 0, incrémentée de 20 à chaque itération (de 20 millisecondes) si PinceOuverture est positif, sinon décrémenté de 20)
 // 500 est une valeur aléatoire
-const int OuvertureMaximalePince = 20;
+const int OuvertureMaximalePince = 200;
 
 class TKPince {
 public:

@@ -57,13 +57,16 @@ void TKBras::Set()
 		std::cout << "Piston vertical: " << EtatPistonVertical << "\n";
 	}
 
-	PistonHorizontal->Set(EtatPistonHorizontal);
-	PistonVertical->Set(EtatPistonVertical);
+	// Mesures de sécurité
+	// Si le piston vertical est activé et que le piston horizontal doit être fermé
+	// Ou que le piston horizontal est désactivé et que le piston vertical doit être ouvert
+	// Bloquer l'opération!
+	if(!(PistonVertical->Get()&!PistonHorizontal)) {PistonHorizontal->Set(EtatPistonHorizontal);}
+	if(!(!EtatPistonHorizontal&PistonVertical)) {PistonVertical->Set(EtatPistonVertical);}
 
 }
 void TKBras::PositionBrasBase()
 {
-	printf("Bras!");
 	PistonVerticalMonter();
 	reculer = true;
 

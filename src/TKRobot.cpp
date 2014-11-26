@@ -66,8 +66,6 @@ void TKRobot::TeleopInit()
 {
 	// Mettre en position initiale (x- z+ p-)
 	printf("\nTeleopInit: brasdrapeau=%p\n", BrasDrapeau);
-	BrasDrapeau->PositionBrasBase();
-	printf("\nBras mis en position de base");
 	//PinceDrapeau->PinceOuvrir();
 }
 
@@ -76,19 +74,17 @@ void TKRobot::TeleopInit()
  */
 void TKRobot::TeleopPeriodic()
 {
-
-	printf("\nTeleopPeriodic Running...");
 	DrivingBase->Drive(Gamepad->GetRawAxis(0), Gamepad->GetRawAxis(1));
 
 	// Put arm in grab position
-	if(Gamepad->Joystick::GetRawButton(1)&(!BrasDrapeau->descendre))
+	if(Gamepad->Joystick::GetRawButton(1))
 	{
 		printf("\nBouton A activated...");
 		BrasDrapeau->PositionBrasPrise();
 	}
 
 
-	if(((Gamepad->Joystick::GetRawButton(2))&(!BrasDrapeau->reculer)))
+	if(Gamepad->Joystick::GetRawButton(2))
 		{
 
 			printf("\nBouton B activated...");

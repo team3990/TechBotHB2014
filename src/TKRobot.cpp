@@ -6,10 +6,21 @@
  */
 TKRobot::TKRobot()
 {
+	printf("\nInstantiate LiveWindow");
 	lw = LiveWindow::GetInstance();
-	BrasDrapeau = new TKBras(6, 4);
-	PinceDrapeau = new TKPince(0);
-	Gamepad = new TKGamepad(1);
+	printf("\nPointeur lw: %p", lw);
+
+	// Robot Objects
+	printf("\nInstantiate TKBras");
+	BrasDrapeau = new TKBras(kSol_PistonVertical, kSol_PistonHorizontal);
+
+	printf("\nInstantiate TKPince");
+	// PinceDrapeau = new TKPince(kSol_Pince);
+
+	printf("\nInstantiate TKGamepad");
+	Gamepad = new TKGamepad(0);
+
+	printf("\nInstantiate TKDrivingBase");
 	DrivingBase = new TKDrivingBase();
 }
 
@@ -54,8 +65,10 @@ void TKRobot::AutonomousPeriodic()
 void TKRobot::TeleopInit()
 {
 	// Mettre en position initiale (x- z+ p-)
+	printf("\nTeleopInit: brasdrapeau=%p\n", BrasDrapeau);
 	BrasDrapeau->PositionBrasBase();
-	//	PinceDrapeau->PinceOuvrir();
+	printf("\nBras mis en position de base");
+	//PinceDrapeau->PinceOuvrir();
 }
 
 /**
@@ -64,13 +77,21 @@ void TKRobot::TeleopInit()
 void TKRobot::TeleopPeriodic()
 {
 
-	DrivingBase->Drive(Gamepad->GetLeftX(), Gamepad->GetLeftY());
-	if(Gamepad->Joystick::GetRawButton(0))
+	printf("\nTeleopPeriodic Running...");
+	DrivingBase->Drive(Gamepad->GetRawAxis(0), Gamepad->GetRawAxis(1));
+
+	// Put arm in grab position
+	if(Gamepad->Joystick::GetRawButton(1)&(!BrasDrapeau->descendre))
 	{
+		printf("\nBouton A activated...");
 		BrasDrapeau->PositionBrasPrise();
 	}
-	if(Gamepad->Joystick::GetRawButton(1))
+
+
+	if(((Gamepad->Joystick::GetRawButton(2))&(!BrasDrapeau->reculer)))
 		{
+
+			printf("\nBouton B activated...");
 			BrasDrapeau->PositionBrasBase();
 		}
 	BrasDrapeau->Set();
@@ -83,7 +104,8 @@ void TKRobot::TeleopPeriodic()
  */
 void TKRobot::TestPeriodic()
 {
-	lw->Run();
+	printf("\nTestPeriodic Running...");
+	// lw->Run();
 }
 
 

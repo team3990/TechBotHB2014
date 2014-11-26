@@ -5,20 +5,19 @@
  *      Author: Administrateur
  */
 
-#ifndef SRC_TKGAMEPAD_H_
-#define SRC_TKGAMEPAD_H_
+#ifndef TECHBOTHB2014_SRC_TKGAMEPAD_H_
+#define TECHBOTHB2014_SRC_TKGAMEPAD_H_
 
-#include "WPILIB.h"
-#include <vector>
-#include <map>
+#include "WPILib.h"
+// #include <vector>
+// #include <map>
 
-enum NomBouton {BOUTONA, BOUTONB, BOUTONX, BOUTONY, STICK};
-
+// enum NomBouton {BOUTONA, BOUTONB, BOUTONX, BOUTONY, RBBUTTON, LBBUTTON, BACKBUTTON, STARTBUTTON, LEFTSTICKBUTTON, RIGHTSTICKBUTTON};
+// enum NomAxe {LEFTSTICKXAXIS, LEFTSTICKYAXIS, LEFTTRIGGER, RIGHTTRIGGER, RIGHTSTICKXAXIS, RIGHTSTICKYAXIS};
 
 class TKGamepad : public Joystick
 {
 public:
-
 // Constructors
 	explicit 			TKGamepad(uint32_t port);
 	virtual 			~TKGamepad();
@@ -29,7 +28,9 @@ public:
 	float				GetRightX();
 	float				GetRightY();
 	float				Trigger();
-	std::vector<NomBouton>   Get();
+	// std::vector<NomBouton>   Get();
+	// float LeftStick[];
+	// float RightStick[];
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(TKGamepad);
@@ -37,4 +38,4 @@ private:
 };
 
 
-#endif /* SRC_TKGAMEPAD_H_ */
+#endif /* TECHBOTHB2014_SRC_TKGAMEPAD_H_ */

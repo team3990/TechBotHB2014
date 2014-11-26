@@ -5,8 +5,8 @@
  *      Author: Administrateur
  */
 
-#ifndef SRC_TKCONFIG_H_
-#define SRC_TKCONFIG_H_
+#ifndef TECHBOTHB2014_SRC_TKCONFIG_H_
+#define TECHBOTHB2014_SRC_TKCONFIG_H_
 
 /**
 * Digital I/O
@@ -19,6 +19,9 @@
 /**
  * Solenoids & pneumatics
  */
+const int kSol_Pince(0);
+const int kSol_PistonHorizontal(6);
+const int kSol_PistonVertical(4);
 const int kSol_Shifter(5);					// DrivingBase.h
 
 /**
@@ -35,4 +38,4 @@ const int kRobotLenght(37);
 
 
 
-#endif /* SRC_TKCONFIG_H_ */
+#endif /* TECHBOTHB2014_SRC_TKCONFIG_H_ */

@@ -5,8 +5,8 @@
  *      Author: Administrateur
  */
 
-#ifndef SRC_TKDRIVEBASE_H_
-#define SRC_TKDRIVEBASE_H_
+#ifndef TECHBOTHB2014_SRC_TKDRIVEBASE_H_
+#define TECHBOTHB2014_SRC_TKDRIVEBASE_H_
 
 #include "WPILib.h"
 #include "TKConfig.h"
@@ -22,11 +22,13 @@ public:
 	virtual ~TKDrivingBase();
 
 	// Solenoids & pneumatics
+
 	Solenoid		* mShifter;
 
 	// PWM
 	Victor			* mMotorLeft;
 	Victor			* mMotorRight;
+
 
 	// Other
 	RobotDrive		* mMotors;
@@ -43,4 +45,4 @@ public:
 
 
 
-#endif /* SRC_TKDRIVEBASE_H_ */
+#endif /* TECHBOTHB2014_SRC_TKDRIVEBASE_H_ */

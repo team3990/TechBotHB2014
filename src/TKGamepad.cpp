@@ -12,6 +12,8 @@
  */
 TKGamepad::TKGamepad(uint32_t port) : Joystick(port)
 {
+	// float LeftStick[1];
+	// float RightStick[1];
 }
 
 /**
@@ -32,6 +34,11 @@ float TKGamepad::GetLeftY()
 	return Joystick::GetRawAxis(1);
 }
 
+float TKGamepad::GetRightX()
+{
+	return Joystick::GetRawAxis((uint32_t)3);
+}
+
 float TKGamepad::GetRightY()
 {
 	return Joystick::GetRawAxis((uint32_t)4);
@@ -39,9 +46,11 @@ float TKGamepad::GetRightY()
 
 float TKGamepad::Trigger()
 {
+
 	return Joystick::GetRawAxis(uint32_t(3));
 }
 
+/*
 std::vector<NomBouton> TKGamepad::Get()
 {
 	std::map<int, NomBouton> x;
@@ -59,6 +68,11 @@ std::vector<NomBouton> TKGamepad::Get()
 			aretourner.push_back(iter->second);
 		}
 	}
+	LeftStick[0] = this->GetLeftX();
+	LeftStick[1] = this->GetLeftY();
+	RightStick[0] = this->GetRightX();
+	RightStick[1] = this->GetRightY();
 
 	return aretourner;
 }
+*/

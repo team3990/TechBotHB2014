@@ -1,5 +1,6 @@
 /*
  * Bras.h
+
  *
  *  Created on: 2014-11-22
  *      Author: 11110305
@@ -8,6 +9,7 @@
 #ifndef SRC_BRAS_H_
 #define SRC_BRAS_H_
 #include "WPIlib.h"
+#include <iostream>
 
 
 class TKBras {
@@ -20,6 +22,10 @@ class TKBras {
 		void PistonVerticalDescendre();
 		void PistonHorizontalAvancer();
 		void PistonHorizontalReculer();
+		int descendrecompteur = 0;
+		int reculercompteur = 0;
+		bool descendre;
+		bool reculer;
 
 		void Set();
 		void PositionBrasBase();
@@ -28,6 +34,8 @@ class TKBras {
 	private:
 		Solenoid * PistonVertical;
 		Solenoid * PistonHorizontal;
+
+
 
 		// Utilisés par la fonction Set
 		bool EtatPistonVertical, EtatPistonHorizontal;

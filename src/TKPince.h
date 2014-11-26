@@ -5,8 +5,8 @@
  *      Author: 11110305
  */
 
-#ifndef SRC_TKPINCE_H_
-#define SRC_TKPINCE_H_
+#ifndef TECHBOTHB2014_SRC_TKPINCE_H_
+#define TECHBOTHB2014_SRC_TKPINCE_H_
 
 #include <WPIlib.h>
 
@@ -40,4 +40,4 @@ private:
 
 };
 
-#endif /* SRC_TKPINCE_H_ */
+#endif /* TECHBOTHB2014_SRC_TKPINCE_H_ */

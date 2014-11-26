@@ -5,8 +5,8 @@
  *      Author: Administrateur
  */
 
-#ifndef SRC_TKROBOT_H_
-#define SRC_TKROBOT_H_
+#ifndef TECHBOTHB2014_SRC_TKROBOT_H_
+#define TECHBOTHB2014_SRC_TKROBOT_H_
 
 
 #include "TKBras.h"
@@ -42,4 +42,4 @@ public:
 
 
 
-#endif /* SRC_TKROBOT_H_ */
+#endif /* TECHBOTHB2014_SRC_TKROBOT_H_ */

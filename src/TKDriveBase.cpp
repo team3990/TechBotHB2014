@@ -11,10 +11,7 @@
 /**
  * Constructor
  */
-TKDrivingBase::TKDrivingBase() : 	mShifter(NULL),
-									mMotorLeft(NULL),
-									mMotorRight(NULL),
-									mMotors(NULL)
+TKDrivingBase::TKDrivingBase()
 {
 	// Initialize
 	mShifter = new Solenoid(uint32_t(kSol_Shifter));
@@ -31,7 +28,7 @@ TKDrivingBase::TKDrivingBase() : 	mShifter(NULL),
 	mMotorRight->Set(0.0);
 
 	// Create a new robot drive using standard left/right drive.
-	//mMotors = new RobotDrive(&mMotorLeft, &mMotorRight);
+	mMotors = new RobotDrive(*mMotorLeft, *mMotorRight);
 
 	// Enable Motor Safety features
 	mMotorLeft->EnableDeadbandElimination(true);

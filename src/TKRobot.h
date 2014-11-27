@@ -1,24 +1,23 @@
-/*
- * TKRobot.h
- *
- *  Created on: 2014-11-22
- *      Author: Administrateur
+/**
+ * Copyright (c) Équipe Team 3990: Tech for Kids 2014. All Rights Reserved.
+ * Open Source Software - may be modified and shared by FRC teams. The code
+ * must be accompanied by the FIRST BSD license file.
+ * @author 		Olivier Lalonde, Esther Guerrier
+ * @abstract	Class for handling robot operations.
  */
 
 #ifndef TECHBOTHB2014_SRC_TKROBOT_H_
 #define TECHBOTHB2014_SRC_TKROBOT_H_
 
-
 #include "TKBras.h"
 #include "TKPince.h"
 #include "TKGamepad.h"
 #include "TKDriveBase.h"
-
+#include "TKConfig.h"
 
 class TKRobot : public IterativeRobot
 {
 private:
-	LiveWindow		* lw;
 
 public:
 	// Constructors
@@ -29,7 +28,8 @@ public:
 	TKBras 			* BrasDrapeau;
 	TKPince			* PinceDrapeau;
 	TKDrivingBase 	* DrivingBase;
-	TKGamepad 		* Gamepad;
+	TKGamepad 		* gamepadLeft;
+	TKGamepad		* gamepadRight;
 
 	// Robot Routines
 	void			RobotInit();

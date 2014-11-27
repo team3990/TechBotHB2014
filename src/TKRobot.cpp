@@ -1,24 +1,28 @@
-#include "TKRobot.h"
+/**
+ * Copyright (c) Équipe Team 3990: Tech for Kids 2014. All Rights Reserved.
+ * Open Source Software - may be modified and shared by FRC teams. The code
+ * must be accompanied by the FIRST BSD license file.
+ * @author 		Olivier Lalonde, Esther Guerrier
+ * @abstract	Class for handling robot operations.
+ */
 
+#include "TKRobot.h"
 
 /**
  * Constructor
  */
 TKRobot::TKRobot()
 {
-	printf("\nInstantiate LiveWindow");
-	lw = LiveWindow::GetInstance();
-	printf("\nPointeur lw: %p", lw);
-
 	// Robot Objects
 	printf("\nInstantiate TKBras");
 	BrasDrapeau = new TKBras(kSol_PistonVertical, kSol_PistonHorizontal);
 
 	printf("\nInstantiate TKPince");
-	// PinceDrapeau = new TKPince(kSol_Pince);
+	PinceDrapeau = new TKPince(kPWM_Pince);
 
 	printf("\nInstantiate TKGamepad");
-	Gamepad = new TKGamepad(0);
+	gamepadLeft = new TKGamepad(kUSB_GamePadLeft);
+	gamepadRight = new TKGamepad(kUSB_GamePadRight);
 
 	printf("\nInstantiate TKDrivingBase");
 	DrivingBase = new TKDrivingBase();
@@ -31,7 +35,7 @@ TKRobot::~TKRobot()
 {
 	delete BrasDrapeau;
 	delete PinceDrapeau;
-	delete Gamepad;
+	delete gamepadLeft;
 	delete DrivingBase;
 }
 
@@ -66,7 +70,7 @@ void TKRobot::TeleopInit()
 {
 	// Mettre en position initiale (x- z+ p-)
 	printf("\nTeleopInit: brasdrapeau=%p\n", BrasDrapeau);
-	//PinceDrapeau->PinceOuvrir();
+	PinceDrapeau->Open();
 }
 
 /**
@@ -74,24 +78,35 @@ void TKRobot::TeleopInit()
  */
 void TKRobot::TeleopPeriodic()
 {
-	DrivingBase->Drive(Gamepad->GetRawAxis(0), Gamepad->GetRawAxis(1));
+	// Driving Base
+	DrivingBase->Drive(gamepadRight->GetRawAxis(0), gamepadRight->GetRawAxis(1));
+
+	// Handlers
+	BrasDrapeau->Set();
+	PinceDrapeau->Run();
 
 	// Put arm in grab position
-	if(Gamepad->Joystick::GetRawButton(1))
+	if (gamepadLeft->GetRawButton(1))
 	{
-		printf("\nBouton A activated...");
 		BrasDrapeau->PositionBrasPrise();
 	}
 
+	// Retract arm inside the robot
+	if (gamepadLeft->GetRawButton(2))
+	{
+		BrasDrapeau->PositionBrasBase();
+	}
 
-	if(Gamepad->Joystick::GetRawButton(2))
-		{
-
-			printf("\nBouton B activated...");
-			BrasDrapeau->PositionBrasBase();
-		}
-	BrasDrapeau->Set();
-	//PinceDrapeau->Set();
+	// Open clamp
+	if (gamepadLeft->GetRawButton(5) || gamepadLeft->GetRawButton(6) ||
+			gamepadLeft->GetLeftTriggerButton() || gamepadLeft->GetRightTriggerButton())
+	{
+		PinceDrapeau->Open();
+	}
+	else
+	{
+		PinceDrapeau->Close();
+	}
 
 }
 
@@ -100,10 +115,6 @@ void TKRobot::TeleopPeriodic()
  */
 void TKRobot::TestPeriodic()
 {
-	printf("\nTestPeriodic Running...");
-	// lw->Run();
 }
-
-
 
 START_ROBOT_CLASS(TKRobot);
